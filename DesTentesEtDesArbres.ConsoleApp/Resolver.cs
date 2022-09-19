@@ -1,9 +1,4 @@
-﻿using DesTentesEtDesArbres.ConsoleApp.Core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DesTentesEtDesArbres.Core;
 
 namespace DesTentesEtDesArbres.ConsoleApp
 {
@@ -20,7 +15,7 @@ namespace DesTentesEtDesArbres.ConsoleApp
         {
             foreach (var tile in _playground.Tiles)
             {
-                if (!tile.IsNextToATree)
+                if (!tile.IsNextToATree && tile.State == TileState.Unknown)
                     tile.State = TileState.Grass;
             }
         }

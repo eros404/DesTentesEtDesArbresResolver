@@ -7,4 +7,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DesTentesEtDesArbres.Core\DesTentesEtDesArbres.Core.csproj" />
+  </ItemGroup>
+
 </Project>
