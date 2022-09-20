@@ -3,7 +3,7 @@ using DesTentesEtDesArbres.Core;
 namespace DesTentesEtDesArbres.Tests
 {
     [TestClass]
-    public class PlaygroundTest
+    public class PlaygroundTest : TestBase
     {
         private readonly TileState[,] _tilesStates = new TileState[7, 4]
         {
@@ -44,9 +44,7 @@ namespace DesTentesEtDesArbres.Tests
         public void PlaygroundInitialization_TitleStateMatrix()
         {
             var matrix = Playground.GetTileStateMatrix();
-            for (uint i = 0; i < _tilesStates.GetLength(0); i++)
-                for (uint y = 0; y < _tilesStates.GetLength(1); y++)
-                    Assert.AreEqual(_tilesStates[i, y],matrix[i, y]);
+            CompareTwoMatrix(_tilesStates, matrix, _tilesStates.GetLength(0), _tilesStates.GetLength(1));
         }
         [TestMethod]
         [DataRow(0)]

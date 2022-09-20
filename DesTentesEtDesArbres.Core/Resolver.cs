@@ -27,5 +27,33 @@ namespace DesTentesEtDesArbres.Core
                 .ToList()
                 .ForEach(line => line.PutGrassOnAllUnknownTile());
         }
+        private static void PlaceTentIfIsUnknown(Tile tile)
+        {
+            if (tile.PutTentIfIsUnknown())
+            {
+                var neighbors = tile.GetNeighborsIncludingDiagonals();
+                neighbors.ForEach(n => n.PutGrassIfIsUnknown());
+            }
+        }
+        public void CompleteEvidentLines()
+        {
+            _playground.RowsAndColumns
+                .Where(line => line.ExpectedNumberOfTents == line.NumberOfTents + line.NumberOfUnknows)
+                .SelectMany(line => line.Tiles)
+                .ToList()
+                .ForEach(tile => PlaceTentIfIsUnknown(tile));
+        }
+        public void CompleteEvidentTrees()
+        {
+            foreach (var tile in _playground.GetAllTrees())
+            {
+                var neighborsUnknown = tile.GetNeighbors();
+                if (neighborsUnknown.Any(n => n.State == TileState.Tent))
+                    continue;
+                if (neighborsUnknown.Where(n => n.State == TileState.Unknown)
+                    .Count() == 1)
+                    PlaceTentIfIsUnknown(neighborsUnknown.First());
+            }
+        }
     }
 }

@@ -53,5 +53,13 @@
                     matrix[i, y] = Tiles[i, y].State;
             return matrix;
         }
+        public List<Tile> GetAllTrees()
+        {
+            var result = new List<Tile>();
+            foreach (var tile in Tiles)
+                if (tile.State == TileState.Tree)
+                    result.Add(tile);
+            return result;
+        }
     }
 }

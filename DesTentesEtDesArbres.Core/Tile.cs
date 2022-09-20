@@ -25,13 +25,40 @@
                 result.Add(_playground.Tiles[X, Y + 1]);
             return result;
         }
+        public List<Tile> GetNeighborsIncludingDiagonals()
+        {
+            var result = GetNeighbors();
+            if (X != 0 && Y != 0)
+                result.Add(_playground.Tiles[X - 1, Y - 1]);
+            if (X != _playground.Height - 1 && Y != 0)
+                result.Add(_playground.Tiles[X + 1, Y - 1]);
+            if (X != 0 && Y != _playground.Width - 1)
+                result.Add(_playground.Tiles[X - 1, Y + 1]);
+            if (X != _playground.Height - 1 && Y != _playground.Width - 1)
+                result.Add(_playground.Tiles[X + 1, Y + 1]);
+            return result;
+        }
         public bool IsNextToATree => GetNeighbors()
             .Where(n => n.State == TileState.Tree)
             .Any();
-        public void PutGrassIfIsUnknown()
+        public bool PutGrassIfIsUnknown()
         {
             if (State == TileState.Unknown)
+            {
                 State = TileState.Grass;
+                return true;
+            }
+            return false;
+
+        }
+        public bool PutTentIfIsUnknown()
+        {
+            if (State == TileState.Unknown)
+            {
+                State = TileState.Tent;
+                return true;
+            }
+            return false;
         }
     }
 }

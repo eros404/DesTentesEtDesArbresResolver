@@ -10,6 +10,7 @@
             Tiles = tiles;
         }
         public int NumberOfTents => Tiles.Where(t => t.State == TileState.Tent).Count();
+        public int NumberOfUnknows => Tiles.Where(t => t.State == TileState.Unknown).Count();
         public bool HasUnknowns => Tiles.Where(t => t.State == TileState.Unknown).Any();
         public void PutGrassOnAllUnknownTile()
         {
