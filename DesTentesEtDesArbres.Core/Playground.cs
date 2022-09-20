@@ -7,6 +7,7 @@
         public readonly uint[] NumberOfTreesByColumn;
         public readonly TileLine[] Rows;
         public readonly TileLine[] Columns;
+        public readonly TileLine[] RowsAndColumns;
         public readonly int Width;
         public readonly int Height;
         public Playground(TileState[,] tilesStates, uint[] numberOfTreesByRow, uint[] numberOfTreesByColumn)
@@ -40,6 +41,9 @@
                         .ToList(), numberOfTreesByColumn[i]));
             }
             Columns = columns.ToArray();
+            var rowsAndColumns = Rows.ToList();
+            rowsAndColumns.AddRange(Columns);
+            RowsAndColumns = rowsAndColumns.ToArray();
         }
         public TileState[,] GetTileStateMatrix()
         {

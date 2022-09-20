@@ -3,7 +3,7 @@
     public class Tile
     {
         public readonly uint X , Y;
-        public TileState State { get; set; }
+        public TileState State { get; private set; }
         private readonly Playground _playground;
         public Tile(uint x, uint y, Playground playground, TileState tileState)
         {
@@ -28,5 +28,10 @@
         public bool IsNextToATree => GetNeighbors()
             .Where(n => n.State == TileState.Tree)
             .Any();
+        public void PutGrassIfIsUnknown()
+        {
+            if (State == TileState.Unknown)
+                State = TileState.Grass;
+        }
     }
 }

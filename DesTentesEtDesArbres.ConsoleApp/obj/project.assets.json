@@ -27,37 +27,34 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Eros404\\.nuget\\packages\\": {}
+    "C:\\Users\\comlo\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Eros404\\git-workspace\\DesTentesEtDesArbres\\DesTentesEtDesArbres.ConsoleApp\\DesTentesEtDesArbres.ConsoleApp.csproj",
+      "projectUniqueName": "C:\\Users\\comlo\\git-workspace\\DesTentesEtDesArbres\\DesTentesEtDesArbres.ConsoleApp\\DesTentesEtDesArbres.ConsoleApp.csproj",
       "projectName": "DesTentesEtDesArbres.ConsoleApp",
-      "projectPath": "C:\\Users\\Eros404\\git-workspace\\DesTentesEtDesArbres\\DesTentesEtDesArbres.ConsoleApp\\DesTentesEtDesArbres.ConsoleApp.csproj",
-      "packagesPath": "C:\\Users\\Eros404\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Eros404\\git-workspace\\DesTentesEtDesArbres\\DesTentesEtDesArbres.ConsoleApp\\obj\\",
+      "projectPath": "C:\\Users\\comlo\\git-workspace\\DesTentesEtDesArbres\\DesTentesEtDesArbres.ConsoleApp\\DesTentesEtDesArbres.ConsoleApp.csproj",
+      "packagesPath": "C:\\Users\\comlo\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\comlo\\git-workspace\\DesTentesEtDesArbres\\DesTentesEtDesArbres.ConsoleApp\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Eros404\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 18.1.config",
+        "C:\\Users\\comlo\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\DevExpress 18.1\\Components\\System\\Components\\Packages": {},
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Users\\Eros404\\source\\packages": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\Eros404\\git-workspace\\DesTentesEtDesArbres\\DesTentesEtDesArbres.Core\\DesTentesEtDesArbres.Core.csproj": {
-              "projectPath": "C:\\Users\\Eros404\\git-workspace\\DesTentesEtDesArbres\\DesTentesEtDesArbres.Core\\DesTentesEtDesArbres.Core.csproj"
+            "C:\\Users\\comlo\\git-workspace\\DesTentesEtDesArbres\\DesTentesEtDesArbres.Core\\DesTentesEtDesArbres.Core.csproj": {
+              "projectPath": "C:\\Users\\comlo\\git-workspace\\DesTentesEtDesArbres\\DesTentesEtDesArbres.Core\\DesTentesEtDesArbres.Core.csproj"
             }
           }
         }
