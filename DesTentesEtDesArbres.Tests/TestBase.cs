@@ -1,11 +1,4 @@
-﻿using DesTentesEtDesArbres.Core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DesTentesEtDesArbres.Tests
+﻿namespace DesTentesEtDesArbres.Tests
 {
     public class TestBase
     {

@@ -14,8 +14,27 @@
         public bool HasUnknowns => Tiles.Where(t => t.State == TileState.Unknown).Any();
         public void PutGrassOnAllUnknownTile()
         {
+            Tiles.ForEach(tile => tile.PutGrassIfIsUnknown());
+        }
+        public List<TileGroup> GetGroups()
+        {
+            var result = new List<TileGroup>();
+            TileGroup? storedGroup = null;
             foreach (var tile in Tiles)
-                tile.PutGrassIfIsUnknown();
+            {
+                if (storedGroup == null)
+                    storedGroup = new TileGroup(new() { tile }, tile.State);
+                else if (storedGroup.TilesState == tile.State)
+                    storedGroup.Tiles.Add(tile);
+                else
+                {
+                    result.Add(storedGroup);
+                    storedGroup = new TileGroup(new() { tile }, tile.State);
+                }
+            }
+            if (storedGroup != null)
+                result.Add(storedGroup);
+            return result;
         }
     }
 }

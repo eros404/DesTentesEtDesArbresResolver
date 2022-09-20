@@ -3,13 +3,23 @@
     public class Tile
     {
         public readonly uint X , Y;
-        public TileState State { get; private set; }
+        private TileState tileState;
+        public event EventHandler StateChanged = default!;
+        public TileState State
+        {
+            get => tileState;
+            private set
+            {
+                tileState = value;
+                StateChanged?.Invoke(this, EventArgs.Empty);
+            }
+        }
         private readonly Playground _playground;
         public Tile(uint x, uint y, Playground playground, TileState tileState)
         {
             X = x;
             Y = y;
-            State = tileState;
+            this.tileState = tileState;
             _playground = playground;
         }
         public List<Tile> GetNeighbors()

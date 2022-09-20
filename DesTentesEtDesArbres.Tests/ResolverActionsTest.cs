@@ -1,14 +1,9 @@
 ﻿using DesTentesEtDesArbres.Core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DesTentesEtDesArbres.Tests
 {
     [TestClass]
-    public class ResolverTest : TestBase
+    public class ResolverActionsTest : TestBase
     {
         private readonly TileState[,] _tilesStates = new TileState[7, 4]
         {
@@ -68,21 +63,40 @@ namespace DesTentesEtDesArbres.Tests
             CompareTwoMatrix(expectedResult, result, playground.Height, playground.Width);
         }
         [TestMethod]
-        public void CompleteEvidentLines()
+        public void CompleteEvidentTrees()
         {
             var playground = new Playground(_tilesStatesAfterInitialClean, _numberOfTreesByRow, _numberOfTreesByColumn);
             var resolver = new Resolver(playground);
-            resolver.CompleteEvidentLines();
+            resolver.CompleteEvidentTrees();
+            var result = playground.GetTileStateMatrix();
+            var expectedResult = new TileState[7, 4]
+            {
+                { TileState.Grass, TileState.Tree, TileState.Tent, TileState.Grass },
+                { TileState.Tent, TileState.Grass, TileState.Grass, TileState.Grass },
+                { TileState.Tree, TileState.Tree, TileState.Tent, TileState.Grass },
+                { TileState.Grass, TileState.Grass, TileState.Grass, TileState.Grass },
+                { TileState.Unknown, TileState.Unknown, TileState.Unknown, TileState.Grass },
+                { TileState.Tree, TileState.Tree, TileState.Tree, TileState.Grass },
+                { TileState.Unknown, TileState.Unknown, TileState.Unknown, TileState.Grass }
+            };
+            CompareTwoMatrix(expectedResult, result, playground.Height, playground.Width);
+        }
+        [TestMethod]
+        public void CompleteEvidentGroups()
+        {
+            var playground = new Playground(_tilesStatesAfterInitialClean, _numberOfTreesByRow, _numberOfTreesByColumn);
+            var resolver = new Resolver(playground);
+            resolver.CompleteEasyGroups();
             var result = playground.GetTileStateMatrix();
             var expectedResult = new TileState[7, 4]
                 {
-                    { TileState.Unknown, TileState.Tree, TileState.Unknown, TileState.Grass },
-                    { TileState.Unknown, TileState.Grass, TileState.Grass, TileState.Grass },
+                    { TileState.Grass, TileState.Tree, TileState.Tent, TileState.Grass },
+                    { TileState.Tent, TileState.Grass, TileState.Grass, TileState.Grass },
                     { TileState.Tree, TileState.Tree, TileState.Tent, TileState.Grass },
                     { TileState.Grass, TileState.Grass, TileState.Grass, TileState.Grass },
-                    { TileState.Unknown, TileState.Unknown, TileState.Unknown, TileState.Grass },
+                    { TileState.Grass, TileState.Tent, TileState.Grass, TileState.Grass },
                     { TileState.Tree, TileState.Tree, TileState.Tree, TileState.Grass },
-                    { TileState.Unknown, TileState.Unknown, TileState.Unknown, TileState.Grass }
+                    { TileState.Tent, TileState.Grass, TileState.Tent, TileState.Grass }
                 };
             CompareTwoMatrix(expectedResult, result, playground.Height, playground.Width);
         }

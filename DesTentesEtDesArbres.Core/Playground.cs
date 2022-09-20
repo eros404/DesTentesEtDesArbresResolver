@@ -22,7 +22,11 @@
             Tiles = new Tile[Height, Width];
             for (uint i = 0; i < Height; i++)
                 for (uint y = 0; y < Width; y++)
-                    Tiles[i, y] = new Tile(i, y, this, tilesStates[i, y]);
+                {
+                    var tile = new Tile(i, y, this, tilesStates[i, y]);
+                    tile.StateChanged += TileStateChangedHandler;
+                    Tiles[i, y] = tile;
+                }
             NumberOfTreesByRow = numberOfTreesByRow;
             NumberOfTreesByColumn = numberOfTreesByColumn;
             var rows = new List<TileLine>();
@@ -44,6 +48,11 @@
             var rowsAndColumns = Rows.ToList();
             rowsAndColumns.AddRange(Columns);
             RowsAndColumns = rowsAndColumns.ToArray();
+        }
+        public event EventHandler StateChanged = default!;
+        private void TileStateChangedHandler(object? sender, EventArgs args)
+        {
+            StateChanged?.Invoke(this, EventArgs.Empty);
         }
         public TileState[,] GetTileStateMatrix()
         {
