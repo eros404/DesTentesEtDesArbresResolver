@@ -15,6 +15,12 @@
             NumberOfChanges++;
         }
 
+        public void Resolve()
+        {
+            InitialClean();
+            CompleteEasyGroups();
+        }
+
         public void InitialClean()
         {
             Clean();

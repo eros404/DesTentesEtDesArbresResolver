@@ -1,4 +1,5 @@
-﻿using DesTentesEtDesArbres.ConsoleApp.Spectre;
+﻿using DesTentesEtDesArbres.ConsoleApp.Data;
+using DesTentesEtDesArbres.ConsoleApp.Spectre;
 using DesTentesEtDesArbres.Core;
 using Spectre.Console;
 
@@ -6,7 +7,7 @@ namespace DesTentesEtDesArbres.ConsoleApp.Workflows
 {
     public static class NewLevelWorkflow
     {
-        public static LevelDefinition Start()
+        public static void Start()
         {
             var levelDefinition = new LevelDefinition
             {
@@ -63,9 +64,13 @@ namespace DesTentesEtDesArbres.ConsoleApp.Workflows
                 AnsiConsole.Clear();
                 AnsiConsoleWrapper.DisplayPlaygroundForTreeSelection(coordonate, playgroundInitializer.TilesStates,
                     playgroundInitializer.NumberOfTreesByRow, playgroundInitializer.NumberOfTreesByColumn);
+                AnsiConsole.MarkupLine("Arrows to move");
+                AnsiConsole.MarkupLine("[green]Enter[/] to place or remove a tree");
+                AnsiConsole.MarkupLine("[red]Echap[/] to confirm the level");
                 keyPressed = Console.ReadKey().Key;
                 if (keyPressed == ConsoleKey.Enter)
-                    playgroundInitializer.TilesStates[coordonate.x, coordonate.y] = TileState.Tree;
+                    playgroundInitializer.TilesStates[coordonate.x, coordonate.y] =
+                        playgroundInitializer.TilesStates[coordonate.x, coordonate.y] == TileState.Tree ? TileState.Unknown : TileState.Tree;
                 else if (keyPressed == ConsoleKey.UpArrow && coordonate.x > 0)
                     coordonate.x--;
                 else if (keyPressed == ConsoleKey.DownArrow && coordonate.x < levelDefinition.Height)
@@ -76,7 +81,9 @@ namespace DesTentesEtDesArbres.ConsoleApp.Workflows
                     coordonate.y++;
             } while (keyPressed != ConsoleKey.Escape);
             levelDefinition.SetSerializedPlaygroundInitializer(playgroundInitializer);
-            return levelDefinition;
+            var dbContext = new DesTentesEtDesArbresContext();
+            dbContext.Add(levelDefinition);
+            dbContext.SaveChanges();
         }
     }
 }

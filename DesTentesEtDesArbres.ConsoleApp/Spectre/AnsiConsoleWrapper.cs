@@ -39,7 +39,7 @@ namespace DesTentesEtDesArbres.ConsoleApp.Spectre
             {
                 var rowContent = new List<string>() { numberOfTreesByRow[i].ToString() };
                 rowContent.AddRange(Enumerable.Range(0, numberOfTreesByColumn.Length)
-                        .Select(x => tilesStates[i, x].ToString()));
+                        .Select(x => GetTileStateMarkup(tilesStates[i, x])));
                 table.AddRow(rowContent.ToArray());
             }
             AnsiConsole.Write(table);
@@ -58,10 +58,29 @@ namespace DesTentesEtDesArbres.ConsoleApp.Spectre
             {
                 var rowContent = new List<string>() { numberOfTreesByRow[i].ToString() };
                 rowContent.AddRange(Enumerable.Range(0, numberOfTreesByColumn.Length)
-                        .Select(x => (i, x) == cursor ? "[red]+++[/]" : tilesStates[i, x].ToString()));
+                        .Select(x => (i, x) == cursor ? GetCursorMarkup(tilesStates[i, x]) : GetTileStateMarkup(tilesStates[i, x])));
                 table.AddRow(rowContent.ToArray());
             }
             AnsiConsole.Write(table);
+        }
+        private static string GetTileStateMarkup(TileState tilestate)
+        {
+            return tilestate switch
+            {
+                TileState.Tree => "[darkgreen]Tree[/]",
+                TileState.Grass => "[green3]Grass[/]",
+                TileState.Tent => "[maroon]Tent[/]",
+                TileState.Unknown => "[grey]Unknown[/]",
+                _ => tilestate.ToString(),
+            };
+        }
+        private static string GetCursorMarkup(TileState tilestate)
+        {
+            return tilestate switch
+            {
+                TileState.Tree => "[red]---[/]",
+                _ => "[darkgreen]+++[/]",
+            };
         }
     }
 }
