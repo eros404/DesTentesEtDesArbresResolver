@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System.Text.Json;
 
 namespace DesTentesEtDesArbres.Core
 {
@@ -8,7 +7,8 @@ namespace DesTentesEtDesArbres.Core
         public uint Height { get; set; }
         public uint Width { get; set; }
         public char Letter { get; set; }
-        public string Name => $"{Height}x{Width} {Letter}";
+        public uint Number { get; set; }
+        public string Name => $"{Height}x{Width} {Letter}{Number}";
         public LevelDifficulty Difficulty { get; set; }
         public string SerializedPlaygroundInitializer { get; set; } = string.Empty;
         public PlaygroundInitializer? PlaygroundInitializer =>

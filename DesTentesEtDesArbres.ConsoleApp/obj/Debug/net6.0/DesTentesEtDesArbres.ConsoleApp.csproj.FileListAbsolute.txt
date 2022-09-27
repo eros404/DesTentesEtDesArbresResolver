@@ -52,3 +52,4 @@ C:\Users\Eros404\git-workspace\DesTentesEtDesArbres\DesTentesEtDesArbres.Console
 C:\Users\Eros404\git-workspace\DesTentesEtDesArbres\DesTentesEtDesArbres.ConsoleApp\obj\Debug\net6.0\DesTentesEtDesArbres.ConsoleApp.pdb
 C:\Users\Eros404\git-workspace\DesTentesEtDesArbres\DesTentesEtDesArbres.ConsoleApp\obj\Debug\net6.0\DesTentesEtDesArbres.ConsoleApp.genruntimeconfig.cache
 C:\Users\Eros404\git-workspace\DesTentesEtDesArbres\DesTentesEtDesArbres.ConsoleApp\obj\Debug\net6.0\ref\DesTentesEtDesArbres.ConsoleApp.dll
+C:\Users\Eros404\git-workspace\DesTentesEtDesArbres\DesTentesEtDesArbres.ConsoleApp\bin\Debug\net6.0\Newtonsoft.Json.dll

@@ -86,7 +86,7 @@ namespace DesTentesEtDesArbres.Tests
         {
             var playground = new Playground(_tilesStatesAfterInitialClean, _numberOfTreesByRow, _numberOfTreesByColumn);
             var resolver = new Resolver(playground);
-            resolver.CompleteEasyGroups();
+            resolver.CompleteByUnknownGroups();
             var result = playground.GetTileStateMatrix();
             var expectedResult = new TileState[7, 4]
                 {

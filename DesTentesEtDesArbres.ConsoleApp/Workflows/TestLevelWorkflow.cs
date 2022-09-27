@@ -2,11 +2,6 @@
 using DesTentesEtDesArbres.ConsoleApp.Spectre;
 using DesTentesEtDesArbres.Core;
 using Spectre.Console;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DesTentesEtDesArbres.ConsoleApp.Workflows
 {
@@ -14,8 +9,14 @@ namespace DesTentesEtDesArbres.ConsoleApp.Workflows
     {
         public static void Start()
         {
+            AnsiConsole.Clear();
             var dbContext = new DesTentesEtDesArbresContext();
             var allLevels = dbContext.LevelDefinitions.ToList();
+            if (!allLevels.Any())
+            {
+                AnsiConsole.MarkupLine("[red]No level[/]");
+                return;
+            }
             var selectedLevelName = AnsiConsole.Prompt(
                 new SelectionPrompt<string>()
                     .Title("Level to test:")
@@ -30,12 +31,22 @@ namespace DesTentesEtDesArbres.ConsoleApp.Workflows
                 return;
             var playground = new Playground(playgroundInitializer.TilesStates, playgroundInitializer.NumberOfTreesByRow, playgroundInitializer.NumberOfTreesByColumn);
             var resolver = new Resolver(playground);
+            int step = 1;
+            if (AnsiConsole.Confirm("Debug mode ?", false))
+                resolver.StateChanged += ResolverStateChangedHandler;
             AnsiConsole.Clear();
             AnsiConsoleWrapper.DisplayPlayground(selectedLevelName, playground.GetTileStateMatrix(),
                 playground.NumberOfTreesByRow, playground.NumberOfTreesByColumn);
             resolver.Resolve();
-            AnsiConsoleWrapper.DisplayPlayground($"{selectedLevelName} [green]Solved[/]", playground.GetTileStateMatrix(),
+            AnsiConsoleWrapper.DisplayPlayground($"{selectedLevelName} [green]Result[/]", playground.GetTileStateMatrix(),
                 playground.NumberOfTreesByRow, playground.NumberOfTreesByColumn);
+
+            void ResolverStateChangedHandler(object? sender, EventArgs args)
+            {
+                AnsiConsoleWrapper.DisplayPlayground($"{selectedLevelName} [blue]Step {step}[/]", playground.GetTileStateMatrix(),
+                    playground.NumberOfTreesByRow, playground.NumberOfTreesByColumn);
+                step++;
+            }
         }
     }
 }

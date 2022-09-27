@@ -23,7 +23,7 @@ namespace DesTentesEtDesArbres.ConsoleApp.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<LevelDefinition>()
-                .HasKey(ld => new { ld.Height, ld.Width, ld.Letter });
+                .HasKey(ld => new { ld.Height, ld.Width, ld.Letter, ld.Number });
         }
     }
 }

@@ -32,7 +32,7 @@
             var rows = new List<TileLine>();
             for (int i = 0; i < Height; i++)
             {
-                rows.Add(new TileLine(Enumerable.Range(0, Width)
+                rows.Add(new TileLine(this, LineOrientation.Horizontal, Enumerable.Range(0, Width)
                         .Select(x => Tiles[i, x])
                         .ToList(), numberOfTreesByRow[i]));
             }
@@ -40,7 +40,7 @@
             var columns = new List<TileLine>();
             for (int i = 0; i < Width; i++)
             {
-                columns.Add(new TileLine(Enumerable.Range(0, Height)
+                columns.Add(new TileLine(this, LineOrientation.Vertical, Enumerable.Range(0, Height)
                         .Select(x => Tiles[x, i])
                         .ToList(), numberOfTreesByColumn[i]));
             }

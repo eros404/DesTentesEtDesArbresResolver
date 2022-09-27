@@ -9,6 +9,7 @@ namespace DesTentesEtDesArbres.ConsoleApp.Workflows
     {
         public static void Start()
         {
+            AnsiConsole.Clear();
             var levelDefinition = new LevelDefinition
             {
                 Height = AnsiConsole.Prompt(
@@ -17,6 +18,8 @@ namespace DesTentesEtDesArbres.ConsoleApp.Workflows
                     new TextPrompt<uint>("Width:")),
                 Letter = AnsiConsole.Prompt(
                     new TextPrompt<char>("Letter:")),
+                Number = AnsiConsole.Prompt(
+                    new TextPrompt<uint>("Number:")),
                 Difficulty = AnsiConsole.Prompt(
                     new SelectionPrompt<LevelDifficulty>()
                         .Title("Difficulty:")
@@ -64,22 +67,22 @@ namespace DesTentesEtDesArbres.ConsoleApp.Workflows
                 AnsiConsole.Clear();
                 AnsiConsoleWrapper.DisplayPlaygroundForTreeSelection(coordonate, playgroundInitializer.TilesStates,
                     playgroundInitializer.NumberOfTreesByRow, playgroundInitializer.NumberOfTreesByColumn);
-                AnsiConsole.MarkupLine("Arrows to move");
-                AnsiConsole.MarkupLine("[green]Enter[/] to place or remove a tree");
-                AnsiConsole.MarkupLine("[red]Echap[/] to confirm the level");
+                AnsiConsole.MarkupLine("[green]Arrows[/] to move");
+                AnsiConsole.MarkupLine("[green]Spacebar[/] to place or remove a tree");
+                AnsiConsole.MarkupLine("[green]Enter[/] to confirm");
                 keyPressed = Console.ReadKey().Key;
-                if (keyPressed == ConsoleKey.Enter)
+                if (keyPressed == ConsoleKey.Spacebar)
                     playgroundInitializer.TilesStates[coordonate.x, coordonate.y] =
                         playgroundInitializer.TilesStates[coordonate.x, coordonate.y] == TileState.Tree ? TileState.Unknown : TileState.Tree;
                 else if (keyPressed == ConsoleKey.UpArrow && coordonate.x > 0)
                     coordonate.x--;
-                else if (keyPressed == ConsoleKey.DownArrow && coordonate.x < levelDefinition.Height)
+                else if (keyPressed == ConsoleKey.DownArrow && coordonate.x < levelDefinition.Height - 1)
                     coordonate.x++;
                 else if (keyPressed == ConsoleKey.LeftArrow && coordonate.y > 0)
                     coordonate.y--;
-                else if (keyPressed == ConsoleKey.RightArrow && coordonate.y < levelDefinition.Width)
+                else if (keyPressed == ConsoleKey.RightArrow && coordonate.y < levelDefinition.Width - 1)
                     coordonate.y++;
-            } while (keyPressed != ConsoleKey.Escape);
+            } while (keyPressed != ConsoleKey.Enter);
             levelDefinition.SetSerializedPlaygroundInitializer(playgroundInitializer);
             var dbContext = new DesTentesEtDesArbresContext();
             dbContext.Add(levelDefinition);

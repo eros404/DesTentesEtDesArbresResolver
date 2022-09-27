@@ -4,6 +4,7 @@
     {
         private readonly Playground _playground;
         public uint NumberOfChanges { get; private set; }
+        public event EventHandler StateChanged = default!;
 
         public Resolver(Playground playground)
         {
@@ -14,11 +15,16 @@
         {
             NumberOfChanges++;
         }
+        private void NotifyChanges()
+        {
+            StateChanged?.Invoke(this, EventArgs.Empty);
+        }
 
         public void Resolve()
         {
             InitialClean();
-            CompleteEasyGroups();
+            NotifyChanges();
+            CompleteByUnknownGroups();
         }
 
         public void InitialClean()
@@ -73,19 +79,43 @@
                 }
             });
         }
-        public void CompleteEasyGroups()
+        public void CompleteByUnknownGroups()
         {
             ExecuteWhilePlaygroundStateChange(() =>
             {
                 foreach (var line in _playground.RowsAndColumns)
                 {
+                    uint storedNumberOfChanges = NumberOfChanges;
+                    if (line.NumberOfMissingTents == 0)
+                        continue;
                     var unknownGroups = line.GetGroups().Where(g => g.TilesState == TileState.Unknown).ToList();
-                    if (unknownGroups.Count == 1 &&
-                        (unknownGroups[0].Length == line.ExpectedNumberOfTents || unknownGroups[0].Length == (int)Math.Ceiling(line.ExpectedNumberOfTents * 1.5)))
+
+                    if (unknownGroups.Count == 1)
                     {
-                        unknownGroups[0].Tiles.ForEach(tile => PlaceTentIfUnknown(tile));
+                        var group = unknownGroups[0];
+                        if (group.Length == line.NumberOfMissingTents)
+                        {
+                            group.Tiles.ForEach(tile => PlaceTentIfUnknown(tile));
+                        }
+                        else if (group.Length - (group.Length / 2) == line.NumberOfMissingTents)
+                        {
+                            if (group.Length % 2 == 0)
+                            {
+                                group.GetNeighbors()
+                                    .Where(neighbor => (line.IsRow && neighbor.X != group.Tiles[0].X) || (line.IsColumn && neighbor.Y != group.Tiles[0].Y))
+                                    .ToList()
+                                    .ForEach(tile => tile.PutGrassIfIsUnknown());
+                            }
+                            else
+                            {
+                                group.Tiles.ForEach(tile => PlaceTentIfUnknown(tile));
+                            }
+                        }
                     }
+                    if (storedNumberOfChanges < NumberOfChanges)
+                        NotifyChanges();
                 }
+                Clean();
             });
         }
     }
