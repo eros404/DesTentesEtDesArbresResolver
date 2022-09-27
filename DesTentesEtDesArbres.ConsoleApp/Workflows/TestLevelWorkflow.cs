@@ -1,4 +1,4 @@
-﻿using DesTentesEtDesArbres.ConsoleApp.Data;
+﻿using DesTentesEtDesArbres.Data;
 using DesTentesEtDesArbres.ConsoleApp.Spectre;
 using DesTentesEtDesArbres.Core;
 using Spectre.Console;

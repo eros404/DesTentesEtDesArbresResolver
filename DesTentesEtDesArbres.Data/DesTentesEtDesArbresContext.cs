@@ -1,7 +1,7 @@
 ﻿using DesTentesEtDesArbres.Core;
 using Microsoft.EntityFrameworkCore;
 
-namespace DesTentesEtDesArbres.ConsoleApp.Data
+namespace DesTentesEtDesArbres.Data
 {
     public class DesTentesEtDesArbresContext : DbContext
     {

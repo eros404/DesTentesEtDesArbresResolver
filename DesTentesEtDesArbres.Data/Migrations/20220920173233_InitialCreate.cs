@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace DesTentesEtDesArbres.ConsoleApp.Migrations
+namespace DesTentesEtDesArbres.Migrations
 {
     public partial class InitialCreate : Migration
     {
