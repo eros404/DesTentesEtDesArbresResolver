@@ -89,15 +89,9 @@
                     if (line.NumberOfMissingTents == 0)
                         continue;
                     var unknownGroups = line.GetGroups().Where(g => g.TilesState == TileState.Unknown).ToList();
-
-                    if (unknownGroups.Count == 1)
+                    if (unknownGroups.Sum(group => group.Length - (group.Length / 2)) == line.NumberOfMissingTents)
                     {
-                        var group = unknownGroups[0];
-                        if (group.Length == line.NumberOfMissingTents)
-                        {
-                            group.Tiles.ForEach(tile => PlaceTentIfUnknown(tile));
-                        }
-                        else if (group.Length - (group.Length / 2) == line.NumberOfMissingTents)
+                        foreach (var group in unknownGroups)
                         {
                             if (group.Length % 2 == 0)
                             {
