@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace DesTentesEtDesArbres.Migrations
+namespace DesTentesEtDesArbres.Data.Migrations
 {
     [DbContext(typeof(DesTentesEtDesArbresContext))]
     partial class DesTentesEtDesArbresContextModelSnapshot : ModelSnapshot

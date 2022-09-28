@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace DesTentesEtDesArbres.Migrations
+namespace DesTentesEtDesArbres.Data.Migrations
 {
     public partial class AddLevelNumber : Migration
     {
